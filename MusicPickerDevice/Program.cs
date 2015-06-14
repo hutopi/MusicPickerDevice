@@ -21,10 +21,15 @@ namespace MusicPickerDevice
             List<string> musics = Seeker.GetMusics(allowedExtensions, path);
             List<Track> tracks = Seeker.GetTracks(musics);
 
-            player.AddSongs(tracks);
-            player.PlaySong();
+            Library library = new Library("library.db");
+            library.Erase();
 
-            Console.ReadLine();
+            foreach (Track track in tracks)
+            {
+                library.AddTrack(track);
+            }
+
+            Console.WriteLine(library.Export());
         }
     }
 }
