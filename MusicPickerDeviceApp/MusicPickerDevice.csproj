@@ -61,7 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Album.cs" />
     <Compile Include="App\ApiClient.cs" />
+    <Compile Include="App\Artist.cs" />
     <Compile Include="App\Device.cs" />
     <Compile Include="App\JsonConverters.cs" />
     <Compile Include="App\Library.cs" />

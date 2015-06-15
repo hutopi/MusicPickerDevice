@@ -27,15 +27,17 @@ namespace MusicPickerDeviceApp
             menu.Create();
             ni.ContextMenuStrip = menu.Menu;
 
-            ApiClient client = new ApiClient(new Uri("http://localhost.fiddler:50559"));
-            bool inscrit = client.SignUp("Pierre", "isen59");
+            ApiClient client = new ApiClient(new Uri("http://localhost:50559"));
+          /*  bool inscrit = client.SignUp("Pierre", "isen59");*/
             bool connected = client.LogIn("Pierre", "isen59");
 
-            int deviceId = client.DeviceAdd("Fifoxy");
+        /*    int deviceId = client.DeviceAdd("Fifoxy");
             int deviceId2 = client.DeviceAdd("Coquine");
-            int deviceId3 = client.DeviceAdd("Gog");
+            int deviceId3 = client.DeviceAdd("Gog");*/
 
             List<Device> devices = client.DevicesGet();
+
+            List<Track> artists = client.DeviceGetTracks(2);
         }
 
 
