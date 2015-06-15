@@ -4,13 +4,13 @@ using LiteDB;
 using NAudio.CoreAudioApi.Interfaces;
 using Newtonsoft.Json;
 
-namespace MusicPickerDevice
+namespace MusicPickerDeviceApp.App
 {
     public class Library
     {
         private string dbPath;
         private LiteDatabase database;
-        private LiteCollection<Track> tracks; 
+        private LiteCollection<Track> tracks;
 
         public Library(string dbPath)
         {

@@ -1,7 +1,7 @@
 ﻿using LiteDB;
 using Newtonsoft.Json;
 
-namespace MusicPickerDevice
+namespace MusicPickerDeviceApp.App
 {
     public class Track
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace MusicPickerDevice
+namespace MusicPickerDeviceApp.App
 {
     public class Seeker
     {
@@ -23,15 +23,17 @@ namespace MusicPickerDevice
             foreach (string path in musics)
             {
                 TagLib.File tagFile = TagLib.File.Create(path);
-                tracks.Add(new Track() { 
-                    Artist = tagFile.Tag.FirstArtist, 
+                tracks.Add(new Track()
+                {
+                    Artist = tagFile.Tag.FirstArtist,
                     Album = tagFile.Tag.Album,
                     Title = tagFile.Tag.Title,
                     Genre = tagFile.Tag.FirstGenre,
-                    Year = tagFile.Tag.Year, 
-                    Number = tagFile.Tag.Track, 
-                    Count = tagFile.Tag.TrackCount, 
-                    Path = path });
+                    Year = tagFile.Tag.Year,
+                    Number = tagFile.Tag.Track,
+                    Count = tagFile.Tag.TrackCount,
+                    Path = path
+                });
             }
 
             return tracks;

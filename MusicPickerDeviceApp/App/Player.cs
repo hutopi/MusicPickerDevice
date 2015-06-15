@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NAudio.Wave;
 
-namespace MusicPickerDevice
+namespace MusicPickerDeviceApp.App
 {
     public class Player
     {
