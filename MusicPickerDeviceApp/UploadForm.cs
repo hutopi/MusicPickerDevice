@@ -58,6 +58,7 @@ namespace MusicPickerDeviceApp
             }
 
             Loaded = true;
+            this.Close();
         }
     }
 }

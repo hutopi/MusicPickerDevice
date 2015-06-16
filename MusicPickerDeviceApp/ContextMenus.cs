@@ -8,7 +8,7 @@ using MusicPickerDeviceApp.App;
 namespace MusicPickerDeviceApp
 {
 
-    class ContextMenus
+    public class ContextMenus
     {
 
         private ConnectionForm connectionForm = new ConnectionForm();
@@ -22,27 +22,42 @@ namespace MusicPickerDeviceApp
         {
             Menu = new ContextMenuStrip();
             client = new ApiClient(new Uri("http://localhost:50559"));
+            CheckIfAlreadyConnect();
+        }
+
+        public void CheckIfAlreadyConnect()
+        {
+            //@TODO accès à la base + set de connectionForm.DeviceName + set de connectionForm.DeviceId
+            //@TODO Récupération du Token bearer
         }
 
         public void Create()
         {
-            ToolStripMenuItem item;
-            ToolStripSeparator sep;
+            if (!connected)
+            {
+                ToolStripMenuItem item;
+                ToolStripSeparator sep;
 
-            item = new ToolStripMenuItem();
-            item.Text = "Connect";
-            item.Image = Resources._in;
-            item.Click += new EventHandler(Connection_Click);
-            Menu.Items.Add(item);
+                item = new ToolStripMenuItem();
+                item.Text = "Connect";
+                item.Image = Resources._in;
+                item.Click += new EventHandler(Connection_Click);
+                Menu.Items.Add(item);
 
-            sep = new ToolStripSeparator();
-            Menu.Items.Add(sep);
- 
-            item = new ToolStripMenuItem();
-            item.Text = "Exit";
-            item.Image = Resources.exit;
-            item.Click += new System.EventHandler(Exit_Click);
-            Menu.Items.Add(item);
+                sep = new ToolStripSeparator();
+                Menu.Items.Add(sep);
+
+                item = new ToolStripMenuItem();
+                item.Text = "Exit";
+                item.Image = Resources.exit;
+                item.Click += new System.EventHandler(Exit_Click);
+                Menu.Items.Add(item);
+            }
+            else
+            {
+                UpdateMenuItems();
+            }
+            
         }
 
         public void AddMenu(string name, int index, Bitmap img, EventHandler e)
@@ -63,32 +78,30 @@ namespace MusicPickerDeviceApp
 
         void Connection_Click(object sender, EventArgs e)
         {
-            if (!connected)
+            connectionForm.ShowDialog();
+
+            if (Connect())
             {
-                connectionForm = new ConnectionForm();
-                connectionForm.ShowDialog();
+                connectionForm.DeviceId = client.DeviceAdd(connectionForm.DeviceName);
 
-                //@TODO treatment BDD if already connected
+                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                Menu.Items.Remove(item);
 
-                if (Connect())
-                {
-                    connected = true;
-                    connectionForm.DeviceId = client.DeviceAdd(connectionForm.DeviceName);
-
-                    ToolStripMenuItem item = (ToolStripMenuItem)sender;
-                    Menu.Items.Remove(item);
-
-                    AddMenu("Upload Music", 0, Resources.upload, Load_Click);
-                    AddMenu(string.Format("Log out ({0})", connectionForm.DeviceName), 1, Resources._out, Logout_Click);
-                }
+                UpdateMenuItems();
             }
+        }
+
+        private void UpdateMenuItems()
+        {
+            AddMenu(string.Format("{0}", connectionForm.DeviceName), 0, Resources.device, Device_Click);
+            AddMenu("Upload Music", 1, Resources.upload, Load_Click);    
         }
 
         private bool Connect()
         {
+            client.SignUp(connectionForm.User, connectionForm.Pwd);
             return client.LogIn(connectionForm.User, connectionForm.Pwd);
         }
-
 
         void Load_Click(object sender, EventArgs e)
         {
@@ -97,7 +110,7 @@ namespace MusicPickerDeviceApp
 
             if (loadForm.Loaded)
             {
-                Library library = new Library("");
+                Library library = new Library("Library.db");
                 foreach (Track t in loadForm.Tracks)
                 {
                     library.AddTrack(t);
@@ -107,7 +120,7 @@ namespace MusicPickerDeviceApp
             }
         }
 
-        void Logout_Click(object sender, EventArgs e)
+        void Device_Click(object sender, EventArgs e)
         {
             connectionForm = new ConnectionForm();
             Menu.Items.Clear();

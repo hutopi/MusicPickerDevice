@@ -73,9 +73,9 @@ namespace MusicPickerDeviceApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _out {
+        internal static System.Drawing.Bitmap device {
             get {
-                object obj = ResourceManager.GetObject("_out", resourceCulture);
+                object obj = ResourceManager.GetObject("device", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
