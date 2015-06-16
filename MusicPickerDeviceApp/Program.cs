@@ -23,16 +23,3 @@ namespace MusicPickerDeviceApp
         }
     }
 }
-
-/*
- * Ancien MAIN
-            Player player = new Player();
-            var allowedExtensions = new[] { "mp3", "flac", "wav" };
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-            List<string> musics = Seeker.GetMusics(allowedExtensions, path);
-            List<Track> tracks = Seeker.GetTracks(musics);
-
-            player.AddSongs(tracks);
-            player.PlaySong();
-
-            Console.ReadLine();*/

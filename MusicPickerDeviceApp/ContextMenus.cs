@@ -13,12 +13,15 @@ namespace MusicPickerDeviceApp
 
         private ConnectionForm connectionForm = new ConnectionForm();
         private UploadForm loadForm;
+        private ApiClient client;
 
         public ContextMenuStrip Menu { get; set; }
+        private bool connected = false;
 
         public ContextMenus()
         {
             Menu = new ContextMenuStrip();
+            client = new ApiClient(new Uri("http://localhost:50559"));
         }
 
         public void Create()
@@ -60,13 +63,18 @@ namespace MusicPickerDeviceApp
 
         void Connection_Click(object sender, EventArgs e)
         {
-            if (!connectionForm.Connected)
+            if (!connected)
             {
                 connectionForm = new ConnectionForm();
                 connectionForm.ShowDialog();
 
-                if (connectionForm.Connected)
+                //@TODO treatment BDD if already connected
+
+                if (Connect())
                 {
+                    connected = true;
+                    connectionForm.DeviceId = client.DeviceAdd(connectionForm.DeviceName);
+
                     ToolStripMenuItem item = (ToolStripMenuItem)sender;
                     Menu.Items.Remove(item);
 
@@ -76,11 +84,27 @@ namespace MusicPickerDeviceApp
             }
         }
 
+        private bool Connect()
+        {
+            return client.LogIn(connectionForm.User, connectionForm.Pwd);
+        }
+
 
         void Load_Click(object sender, EventArgs e)
         {
             loadForm = new UploadForm();
             loadForm.ShowDialog();
+
+            if (loadForm.Loaded)
+            {
+                Library library = new Library("");
+                foreach (Track t in loadForm.Tracks)
+                {
+                    library.AddTrack(t);
+                }
+
+                client.DeviceCollectionSubmit(connectionForm.DeviceId, library.Export());
+            }
         }
 
         void Logout_Click(object sender, EventArgs e)

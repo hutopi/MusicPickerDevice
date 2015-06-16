@@ -21,6 +21,8 @@ namespace MusicPickerDeviceApp
             set { deviceName = value; }
         }
 
+        public int DeviceId { get; set; }
+
         private string user;
 
         public string User
@@ -29,12 +31,17 @@ namespace MusicPickerDeviceApp
             set { user = value; }
         }
 
-        public bool Connected { get; set; }
+        private string pwd;
+
+        public string Pwd
+        {
+            get { return pwd; }
+            set { pwd = value; }
+        }
 
         public ConnectionForm()
         {
             InitializeComponent();
-            Connected = false;
         }
 
         private void App_Load(object sender, EventArgs e)
@@ -44,13 +51,9 @@ namespace MusicPickerDeviceApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //treatment here @TODO 
-
-
-            //si OK
-            Connected = true;
             user = username.Text;
-            DeviceName = device.Text;            
+            DeviceName = device.Text;
+            pwd = password.Text;
 
             this.Close();
         }

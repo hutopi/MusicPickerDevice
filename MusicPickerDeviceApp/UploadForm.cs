@@ -15,11 +15,15 @@ namespace MusicPickerDeviceApp
     {
 
         private List<string> path;
+        public List<Track> Tracks;
+
+        public bool Loaded = false;
 
         public UploadForm()
         {
             InitializeComponent();
             path = new List<string>();
+            Tracks = new List<Track>();
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -48,14 +52,12 @@ namespace MusicPickerDeviceApp
                 var allowedExtensions = new[] { "mp3", "wav" };
                 foreach (string s in path)
                 {
-                    List<string> musics = Seeker.GetMusics(allowedExtensions, s);
-                    List<Track> tracks = Seeker.GetTracks(musics);
-
-                    //@TODO pour la BDD ?
+                    List<string> Musics = Seeker.GetMusics(allowedExtensions, s);
+                    Tracks = Seeker.GetTracks(Musics);
                 }
-                
-                //@TODO envoyer la musique sur le webservice
             }
+
+            Loaded = true;
         }
     }
 }
