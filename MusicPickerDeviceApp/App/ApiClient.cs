@@ -45,6 +45,11 @@ namespace MusicPickerDeviceApp.App
             return false;
         }
 
+        public string RetrieveBearer()
+        {
+            return this.bearer;
+        }
+
         public void ProvideBearer(string bearer)
         {
             this.bearer = bearer;

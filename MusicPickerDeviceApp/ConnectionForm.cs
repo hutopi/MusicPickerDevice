@@ -12,49 +12,18 @@ namespace MusicPickerDeviceApp
 {
     public partial class ConnectionForm : Form
     {
+        public delegate void ConnectEvent(string username, string deviceName, string password);
+        private ConnectEvent callback;
 
-        private string deviceName;
-
-        public string DeviceName
+        public ConnectionForm(ConnectEvent callback)
         {
-            get { return deviceName; }
-            set { deviceName = value; }
-        }
-
-        public int DeviceId { get; set; }
-
-        private string user;
-
-        public string User
-        {
-            get { return user; }
-            set { user = value; }
-        }
-
-        private string pwd;
-
-        public string Pwd
-        {
-            get { return pwd; }
-            set { pwd = value; }
-        }
-
-        public ConnectionForm()
-        {
+            this.callback = callback;
             InitializeComponent();
-        }
-
-        private void App_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            user = username.Text;
-            DeviceName = device.Text;
-            pwd = password.Text;
-
+            callback(username.Text, device.Text, password.Text);
             this.Close();
         }
     }

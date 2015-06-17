@@ -111,7 +111,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ConnectionForm";
             this.Text = "Music Picker - Sign in";
-            this.Load += new System.EventHandler(this.App_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

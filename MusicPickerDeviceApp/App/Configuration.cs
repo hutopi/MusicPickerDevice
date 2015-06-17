@@ -12,8 +12,9 @@ namespace MusicPickerDeviceApp.App
     {
         public bool Registered { get; set; }
         public int DeviceId { get; set; }
+        public string DeviceName { get; set; }
         public string Bearer { get; set; }
-        public string[] Paths { get; set; }
+        public List<string> Paths { get; set; }
 
     }
 
@@ -23,7 +24,8 @@ namespace MusicPickerDeviceApp.App
 
         public Configuration()
         {
-            if (File.Exists("musicpicker.json"))
+            this.Model = new ConfigurationModel();
+            /*if (File.Exists("musicpicker.json"))
             {
                 Load();
             }
@@ -31,7 +33,7 @@ namespace MusicPickerDeviceApp.App
             {
                 this.Model = new ConfigurationModel();
                 Save();
-            }
+            }*/
         }
 
         public void Load()

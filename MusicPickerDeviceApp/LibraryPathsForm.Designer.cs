@@ -1,6 +1,6 @@
 ﻿namespace MusicPickerDeviceApp
 {
-    partial class UploadForm
+    partial class LibraryPathsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,10 +35,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // folderBrowser
-            // 
-            this.folderBrowser.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
+
             // 
             // folder
             // 
@@ -91,7 +88,6 @@
             this.Controls.Add(this.folder);
             this.Name = "LoadForm";
             this.Text = "Music Picker - Load";
-            this.Load += new System.EventHandler(this.LoadForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

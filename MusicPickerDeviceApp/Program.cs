@@ -17,7 +17,7 @@ namespace MusicPickerDeviceApp
 
             using (MusicPickerDevice pi = new MusicPickerDevice())
             {
-                pi.Display();
+                pi.Initialize();
                 Application.Run();
             }
         }

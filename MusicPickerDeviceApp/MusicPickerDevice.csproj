@@ -86,11 +86,11 @@
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ContextMenus.cs" />
-    <Compile Include="UploadForm.cs">
+    <Compile Include="LibraryPathsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UploadForm.Designer.cs">
-      <DependentUpon>UploadForm.cs</DependentUpon>
+    <Compile Include="LibraryPathsForm.Designer.cs">
+      <DependentUpon>LibraryPathsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicPickerDevice.cs" />
     <Compile Include="Program.cs" />
@@ -98,8 +98,8 @@
     <EmbeddedResource Include="ConnectionForm.resx">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UploadForm.resx">
-      <DependentUpon>UploadForm.cs</DependentUpon>
+    <EmbeddedResource Include="LibraryPathsForm.resx">
+      <DependentUpon>LibraryPathsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
