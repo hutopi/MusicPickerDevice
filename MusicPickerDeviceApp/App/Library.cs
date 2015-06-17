@@ -8,14 +8,12 @@ namespace MusicPickerDeviceApp.App
 {
     public class Library
     {
-        private string dbPath;
         private LiteDatabase database;
         private LiteCollection<Track> tracks;
 
-        public Library(string dbPath)
+        public Library(LiteDatabase database)
         {
-            this.dbPath = dbPath;
-            this.database = new LiteDatabase(dbPath);
+            this.database = database;
             this.tracks = this.database.GetCollection<Track>("tracks");
         }
 

@@ -35,6 +35,9 @@
     <Reference Include="LiteDB">
       <HintPath>..\packages\LiteDB.1.0.2\lib\net40\LiteDB.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="NAudio">
@@ -67,7 +70,10 @@
     <Compile Include="App\Album.cs" />
     <Compile Include="App\ApiClient.cs" />
     <Compile Include="App\Artist.cs" />
+    <Compile Include="App\Configuration.cs" />
     <Compile Include="App\Device.cs" />
+    <Compile Include="App\DeviceState.cs" />
+    <Compile Include="App\Hub.cs" />
     <Compile Include="App\JsonConverters.cs" />
     <Compile Include="App\Library.cs" />
     <Compile Include="App\Player.cs" />
@@ -86,13 +92,7 @@
     <Compile Include="UploadForm.Designer.cs">
       <DependentUpon>UploadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlayerForm.Designer.cs">
-      <DependentUpon>PlayerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ProcessIcon.cs" />
+    <Compile Include="MusicPickerDevice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConnectionForm.resx">
@@ -100,9 +100,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UploadForm.resx">
       <DependentUpon>UploadForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlayerForm.resx">
-      <DependentUpon>PlayerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

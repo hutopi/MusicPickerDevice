@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using MusicPickerDeviceApp.Properties;
 using System.Drawing;
 using MusicPickerDeviceApp.App;
+using LiteDB;
 
 namespace MusicPickerDeviceApp
 {
@@ -110,7 +111,7 @@ namespace MusicPickerDeviceApp
 
             if (loadForm.Loaded)
             {
-                Library library = new Library("Library.db");
+                Library library = new Library(new LiteDatabase("Library.db"));
                 foreach (Track t in loadForm.Tracks)
                 {
                     library.AddTrack(t);

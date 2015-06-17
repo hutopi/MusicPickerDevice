@@ -4,18 +4,23 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using MusicPickerDeviceApp.App;
 using MusicPickerDeviceApp.Properties;
+using LiteDB;
 
 namespace MusicPickerDeviceApp
 {
-    public class ProcessIcon : IDisposable
+    public class MusicPickerDevice : IDisposable
     {
         NotifyIcon ni;
         private ContextMenus menu;
+        private LiteDatabase database;
+        private Configuration configuration;
 
-        public ProcessIcon()
+        public MusicPickerDevice()
         {
             ni = new NotifyIcon();
             menu = new ContextMenus();
+            database = new LiteDatabase("musicpicker.db");
+            configuration = new Configuration();
         }
 
         public void Display()
@@ -26,19 +31,7 @@ namespace MusicPickerDeviceApp
 
             menu.Create();
             ni.ContextMenuStrip = menu.Menu;
-
-        /*    ApiClient client = new ApiClient(new Uri("http://localhost:50559"));
-            bool inscrit = client.SignUp("Tom", "isen59");
-            bool connected = client.LogIn("Tom", "isen59");
-
-            int deviceId = client.DeviceAdd("Fifoxy");
-            int deviceId2 = client.DeviceAdd("Coquine");
-            //int deviceId3 = client.DeviceAdd("Gog");
-
-            List<Device> devices = client.DevicesGet();*/
         }
-
-
 
         public void Dispose()
         {

@@ -15,7 +15,7 @@ namespace MusicPickerDeviceApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            using (ProcessIcon pi = new ProcessIcon())
+            using (MusicPickerDevice pi = new MusicPickerDevice())
             {
                 pi.Display();
                 Application.Run();
