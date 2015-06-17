@@ -6,24 +6,28 @@ namespace MusicPickerDeviceApp.App
 {
     public class Seeker
     {
-        public static List<string> GetMusics(string[] allowedExtensions, string directory)
-        {
-            var files = Directory
-                .GetFiles(directory, "*.*", SearchOption.AllDirectories)
-                .Where(file => allowedExtensions.Any(file.ToLower().EndsWith))
-                .ToList();
+        private Library library;
+        private string[] allowedExtensions;
 
-            return files;
+        public Seeker(Library library, string[] allowedExtensions)
+        {
+            this.library = library;
+            this.allowedExtensions = allowedExtensions;
         }
 
-        public static List<Track> GetTracks(List<string> musics)
+        public IEnumerable<string> IteratePaths(string directory)
         {
-            var tracks = new List<Track>();
+            return Directory
+                .GetFiles(directory, "*.*", SearchOption.AllDirectories)
+                .Where(file => this.allowedExtensions.Any(file.ToLower().EndsWith));
+        }
 
-            foreach (string path in musics)
+        public void GetTracks(string directory)
+        {
+            foreach (string filePath in IteratePaths(directory))
             {
-                TagLib.File tagFile = TagLib.File.Create(path);
-                tracks.Add(new Track()
+                TagLib.File tagFile = TagLib.File.Create(filePath);
+                this.library.AddTrack(new Track()
                 {
                     Artist = tagFile.Tag.FirstArtist,
                     Album = tagFile.Tag.Album,
@@ -32,11 +36,9 @@ namespace MusicPickerDeviceApp.App
                     Year = tagFile.Tag.Year,
                     Number = tagFile.Tag.Track,
                     Count = tagFile.Tag.TrackCount,
-                    Path = path
+                    Path = filePath
                 });
             }
-
-            return tracks;
         }
     }
 }

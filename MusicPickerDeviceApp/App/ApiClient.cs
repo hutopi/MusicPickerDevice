@@ -117,7 +117,7 @@ namespace MusicPickerDeviceApp.App
             return true;
         }
 
-        public bool DeviceCollectionSubmit(int deviceId, string collection)
+        public async Task<bool> DeviceCollectionSubmit(int deviceId, string collection)
         {
             Uri uri = new Uri(endpoint, string.Format("/api/Devices/{0}/Submit", deviceId));
 
@@ -126,10 +126,10 @@ namespace MusicPickerDeviceApp.App
                 Headers = { ContentType = new MediaTypeHeaderValue("application/json")}
             };
 
-            HttpResponseMessage result = (new HttpClient()
+            HttpResponseMessage result = await (new HttpClient()
             {
                 DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
-            }).PostAsync(uri, content).Result;
+            }).PostAsync(uri, content);
 
             if (!result.IsSuccessStatusCode)
             {

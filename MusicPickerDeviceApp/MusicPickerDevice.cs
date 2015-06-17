@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MusicPickerDeviceApp.App;
 using MusicPickerDeviceApp.Properties;
@@ -15,26 +17,32 @@ namespace MusicPickerDeviceApp
         private LiteDatabase database;
         private Configuration configuration;
         private ApiClient client;
+        private Seeker seeker;
+        private Library library;
 
         public MusicPickerDevice()
         {
+            database = new LiteDatabase("musicpicker.db");
+            configuration = new Configuration();
+            library = new Library(database);
+            seeker = new Seeker(library, new[] { "mp3", "wav" });
             ni = new NotifyIcon();
             menu = new ContextMenus()
             {
                 ConnectionForm = new ConnectionForm(Connect),
-                LoadForm = new LibraryPathsForm(UpdateLibraryPaths)
+                LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths)
             };
-            database = new LiteDatabase("musicpicker.db");
-            configuration = new Configuration();
-            client = new ApiClient(new Uri("http://localhost:50559"));
+            client = new ApiClient(new Uri("http://localhost.fiddler:50559"));
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             Display();
+
             if (this.configuration.Model.Registered)
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName);
+                UpdateLibrary();
             }
             else
             {
@@ -71,24 +79,16 @@ namespace MusicPickerDeviceApp
         {
             this.configuration.Model.Paths = paths;
             UpdateLibrary();
-            /*if (loadForm.Loaded)
-            {
-                Library library = new Library(new LiteDatabase("Library.db"));
-                foreach (Track t in loadForm.Tracks)
-                {
-                    library.AddTrack(t);
-                }
-
-                client.DeviceCollectionSubmit(connectionForm.DeviceId, library.Export());
-            }*/
         }
 
-        private void UpdateLibrary()
+        private async Task UpdateLibrary()
         {
             foreach (string path in this.configuration.Model.Paths)
             {
-                Console.WriteLine(path);
+                await Task.Run(() => this.seeker.GetTracks(path));
             }
+
+            await this.client.DeviceCollectionSubmit(this.configuration.Model.DeviceId, this.library.Export());
         }
 
         public void Dispose()

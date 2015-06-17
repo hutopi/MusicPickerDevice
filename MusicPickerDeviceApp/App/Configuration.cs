@@ -24,7 +24,10 @@ namespace MusicPickerDeviceApp.App
 
         public Configuration()
         {
-            this.Model = new ConfigurationModel();
+            this.Model = new ConfigurationModel()
+            {
+                Paths = new List<string>()
+            };
             /*if (File.Exists("musicpicker.json"))
             {
                 Load();
