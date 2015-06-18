@@ -44,7 +44,8 @@ namespace MusicPickerDeviceApp
             client = new ApiClient(new Uri("http://localhost:50559"));
             hubConnection = new HubConnection("http://localhost:50559");
             hubProxy = hubConnection.CreateHubProxy("MusicHub");
-            new HubClient(player).AttachToHub(hubProxy);
+            HubClient hubClient = new HubClient(player);
+            hubClient.AttachToHub(hubProxy);
         }
 
         public async void Initialize()
@@ -65,12 +66,10 @@ namespace MusicPickerDeviceApp
 
             if (this.configuration.Model.Registered)
             {
-                await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
+                player.AttachNextCallback(async () => await hubProxy.Invoke("Next", this.configuration.Model.DeviceId));
                 await UpdateLibrary();
+                await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
             }
-
-            await hubProxy.Invoke("Queue", this.configuration.Model.DeviceId, new int[] {33});
-            await hubProxy.Invoke("Next", this.configuration.Model.DeviceId);
         }
 
         public void Display()

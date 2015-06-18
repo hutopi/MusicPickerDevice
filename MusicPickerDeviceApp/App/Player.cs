@@ -9,7 +9,8 @@ namespace MusicPickerDeviceApp.App
         private IWavePlayer waveOutDevice { get; set; }
         private Library library;
         public string CurrentSong { get; set; }
-        public bool Paused { get; set; }
+
+        public delegate void NextTrackEvent();
 
         public Player(Library library)
         {
@@ -34,6 +35,11 @@ namespace MusicPickerDeviceApp.App
         public void Pause()
         {
             waveOutDevice.Pause();
+        }
+
+        public void AttachNextCallback(NextTrackEvent nextCallback)
+        {
+            waveOutDevice.PlaybackStopped += (sender, ev) => nextCallback();
         }
     }
 }
