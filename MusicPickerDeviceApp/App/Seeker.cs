@@ -24,22 +24,33 @@ namespace MusicPickerDeviceApp.App
 
         public void GetTracks(string directory)
         {
+            List<Track> tracks = new List<Track>();
+
             foreach (string filePath in IteratePaths(directory))
             {
-                TagLib.File tagFile = TagLib.File.Create(filePath);
-                this.library.AddTrack(new Track()
+                try
                 {
-                    Artist = tagFile.Tag.FirstArtist,
-                    Album = tagFile.Tag.Album,
-                    Title = tagFile.Tag.Title,
-                    Genre = tagFile.Tag.FirstGenre,
-                    Year = tagFile.Tag.Year,
-                    Number = tagFile.Tag.Track,
-                    Count = tagFile.Tag.TrackCount,
-                    Duration = (int) tagFile.Properties.Duration.TotalSeconds,
-                    Path = filePath
-                });
+                    TagLib.File tagFile = TagLib.File.Create(filePath);
+                    tracks.Add(new Track()
+                    {
+                        Artist = tagFile.Tag.FirstArtist,
+                        Album = tagFile.Tag.Album,
+                        Title = tagFile.Tag.Title,
+                        Genre = tagFile.Tag.FirstGenre,
+                        Year = tagFile.Tag.Year,
+                        Number = tagFile.Tag.Track,
+                        Count = tagFile.Tag.TrackCount,
+                        Duration = (int)tagFile.Properties.Duration.TotalSeconds,
+                        Path = filePath
+                    });
+                }
+                catch
+                {
+                    continue;
+                }
             }
+
+            this.library.AddTracks(tracks);
         }
     }
 }

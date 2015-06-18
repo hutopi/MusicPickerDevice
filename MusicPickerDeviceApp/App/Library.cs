@@ -23,6 +23,11 @@ namespace MusicPickerDeviceApp.App
             return track.Id.ToString();
         }
 
+        public void AddTracks(List<Track> tracks)
+        {
+            this.tracks.InsertBulk(tracks);
+        }
+
         public Track GetTrack(string id)
         {
             return this.tracks.FindById(new ObjectId(id));

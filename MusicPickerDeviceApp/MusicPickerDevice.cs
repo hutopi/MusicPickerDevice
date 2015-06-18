@@ -153,7 +153,7 @@ namespace MusicPickerDeviceApp
             this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, true, Disconnect);
             foreach (string path in this.configuration.Model.Paths)
             {
-                this.seeker.GetTracks(path);
+                await Task.Run(() => this.seeker.GetTracks(path));
             }
 
             await this.client.DeviceCollectionSubmit(this.configuration.Model.DeviceId, this.library.Export());
