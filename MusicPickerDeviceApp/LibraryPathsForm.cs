@@ -38,5 +38,14 @@ namespace MusicPickerDeviceApp
             callback(configuration.Paths);
             this.Close();
         }
+
+        private void LibraryPathsForm_Load(object sender, EventArgs e)
+        {
+            foreach (var path in this.configuration.Paths)
+            {
+                foldersLabel.Text += string.Format("- (Added) {0} \n", path);
+            }
+            foldersLabel.Text += "\n";
+        }
     }
 }

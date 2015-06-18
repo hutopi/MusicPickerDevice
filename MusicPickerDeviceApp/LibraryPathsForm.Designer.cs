@@ -35,7 +35,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-
             // 
             // folder
             // 
@@ -76,7 +75,7 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(425, 100);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
-            // LoadForm
+            // LibraryPathsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,8 +85,9 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.folder);
-            this.Name = "LoadForm";
+            this.Name = "LibraryPathsForm";
             this.Text = "Music Picker - Load";
+            this.Load += new System.EventHandler(this.LibraryPathsForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
