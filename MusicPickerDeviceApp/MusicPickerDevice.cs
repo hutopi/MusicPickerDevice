@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MusicPickerDeviceApp.App;
 using MusicPickerDeviceApp.Properties;
 using LiteDB;
+using Microsoft.AspNet.SignalR.Client;
 
 namespace MusicPickerDeviceApp
 {
@@ -19,6 +21,9 @@ namespace MusicPickerDeviceApp
         private ApiClient client;
         private Seeker seeker;
         private Library library;
+        private Player player;
+        private HubConnection hubConnection;
+        private IHubProxy hubProxy;
 
         public MusicPickerDevice()
         {
@@ -32,7 +37,13 @@ namespace MusicPickerDeviceApp
                 ConnectionForm = new ConnectionForm(Connect),
                 LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths)
             };
+
+            player = new Player(library);
+            player.Play();
+
             client = new ApiClient(new Uri("http://localhost:50559"));
+            hubConnection = new HubConnection("http://localhost:50559");
+            hubProxy = hubConnection.CreateHubProxy("MusicHub");
         }
 
         public async void Initialize()
@@ -43,11 +54,18 @@ namespace MusicPickerDeviceApp
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
                 this.client.ProvideBearer(this.configuration.Model.Bearer);
-                await UpdateLibrary();
             }
             else
             {
                 this.menu.ShowUnauthenticatedMenu();
+            }
+
+            await hubConnection.Start();
+
+            if (this.configuration.Model.Registered)
+            {
+                await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
+                await UpdateLibrary();
             }
         }
 
@@ -86,6 +104,7 @@ namespace MusicPickerDeviceApp
 
         private async Task UpdateLibrary()
         {
+            this.library.Erase();
             this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, true);
             foreach (string path in this.configuration.Model.Paths)
             {
