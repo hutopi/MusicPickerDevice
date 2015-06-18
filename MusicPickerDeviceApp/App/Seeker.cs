@@ -36,6 +36,7 @@ namespace MusicPickerDeviceApp.App
                     Year = tagFile.Tag.Year,
                     Number = tagFile.Tag.Track,
                     Count = tagFile.Tag.TrackCount,
+                    Duration = (int) tagFile.Properties.Duration.TotalSeconds,
                     Path = filePath
                 });
             }

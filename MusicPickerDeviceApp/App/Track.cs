@@ -14,6 +14,7 @@ namespace MusicPickerDeviceApp.App
         public uint Year { get; set; }
         public uint Number { get; set; }
         public uint Count { get; set; }
+        public int Duration { get; set; }
         [BsonIndex]
         public string Path { get; set; }
     }

@@ -14,7 +14,6 @@ namespace MusicPickerDeviceApp
 
         public ConnectionForm ConnectionForm;
         public LibraryPathsForm LoadForm;
-        private ApiClient client;
 
         public ContextMenuStrip Menu { get; set; }
         private ToolStripMenuItem ConnectToolStrip;
@@ -24,7 +23,6 @@ namespace MusicPickerDeviceApp
         public ContextMenus()
         {
             Menu = new ContextMenuStrip();
-            client = new ApiClient(new Uri("http://localhost:50559"));
 
             ExitToolStrip = new ToolStripMenuItem()
             {
