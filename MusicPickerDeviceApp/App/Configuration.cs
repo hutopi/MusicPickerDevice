@@ -24,24 +24,23 @@ namespace MusicPickerDeviceApp.App
 
         public Configuration()
         {
-            this.Model = new ConfigurationModel()
-            {
-                Paths = new List<string>()
-            };
-            /*if (File.Exists("musicpicker.json"))
+            if (File.Exists("musicpicker.json"))
             {
                 Load();
             }
             else
             {
-                this.Model = new ConfigurationModel();
+                this.Model = new ConfigurationModel()
+                {
+                    Paths = new List<string>()
+                };
                 Save();
-            }*/
+            }
         }
 
         public void Load()
         {
-            this.Model = JsonConvert.DeserializeObject<ConfigurationModel>(Convert.ToString(File.ReadAllBytes("musicpicker.json")));
+            this.Model = JsonConvert.DeserializeObject<ConfigurationModel>(File.ReadAllText("musicpicker.json"));
         }
 
         public void Save()

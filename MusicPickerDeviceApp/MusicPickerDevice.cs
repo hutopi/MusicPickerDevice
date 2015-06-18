@@ -42,6 +42,7 @@ namespace MusicPickerDeviceApp
             if (this.configuration.Model.Registered)
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
+                this.client.ProvideBearer(this.configuration.Model.Bearer);
                 UpdateLibrary();
             }
             else
@@ -69,7 +70,8 @@ namespace MusicPickerDeviceApp
                     this.configuration.Model.DeviceName = deviceName;
                     this.configuration.Model.DeviceId = deviceId;
                     this.configuration.Model.Bearer = client.RetrieveBearer();
-                    
+                    this.configuration.Save();
+
                     this.menu.ShowAuthenticatedMenu(deviceName, false);
                 }
             }
@@ -78,6 +80,7 @@ namespace MusicPickerDeviceApp
         private void UpdateLibraryPaths(List<string> paths)
         {
             this.configuration.Model.Paths = paths;
+            this.configuration.Save();
             UpdateLibrary();
         }
 
