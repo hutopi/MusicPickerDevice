@@ -43,7 +43,7 @@ namespace MusicPickerDeviceApp
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
                 this.client.ProvideBearer(this.configuration.Model.Bearer);
-                UpdateLibrary();
+                await Task.Run(() => UpdateLibrary());
             }
             else
             {
@@ -77,11 +77,11 @@ namespace MusicPickerDeviceApp
             }
         }
 
-        private void UpdateLibraryPaths(List<string> paths)
+        private async void UpdateLibraryPaths(List<string> paths)
         {
             this.configuration.Model.Paths = paths;
             this.configuration.Save();
-            UpdateLibrary();
+            await Task.Run(() => UpdateLibrary());
         }
 
         private async Task UpdateLibrary()
