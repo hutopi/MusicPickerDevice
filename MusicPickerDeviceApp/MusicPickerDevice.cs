@@ -35,6 +35,7 @@ namespace MusicPickerDeviceApp
             ni = new NotifyIcon();
             menu = new ContextMenus()
             {
+                SignUpForm = new SignUpForm(SignUp),
                 ConnectionForm = new ConnectionForm(Connect),
                 LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths)
             };
@@ -54,7 +55,7 @@ namespace MusicPickerDeviceApp
 
             if (this.configuration.Model.Registered)
             {
-                this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
+                this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false, Disconnect);
                 this.client.ProvideBearer(this.configuration.Model.Bearer);
             }
             else
@@ -77,13 +78,38 @@ namespace MusicPickerDeviceApp
             ni.Icon = Resources.icon;
             ni.Text = "Music Picker";
             ni.Visible = true;
+            
 
             ni.ContextMenuStrip = menu.Menu;
         }
 
+        private void SignUp(string username, string password, string confirmpassword)
+        {
+            if (password == confirmpassword)
+            {
+                if (client.SignUp(username, password))
+                {
+                    ni.ShowBalloonTip(2000, "Successful registration", string.Format("Welcome {0} !", username),
+                        ToolTipIcon.Info);
+                }
+                else
+                {
+                    ni.ShowBalloonTip(2000, "Registration failed", "Server error",
+                        ToolTipIcon.Error);
+                }
+            }
+            else
+            {
+                ni.ShowBalloonTip(2000, "Registration failed", "The passwords are different",
+                        ToolTipIcon.Warning);
+            }
+            
+        }
+
         private void Connect(string username, string deviceName, string password)
         {
-            if (client.LogIn(username, password)) {
+            if (client.LogIn(username, password))
+            {
                 int deviceId = client.DeviceAdd(deviceName);
                 if (deviceId != -1)
                 {
@@ -93,9 +119,25 @@ namespace MusicPickerDeviceApp
                     this.configuration.Model.Bearer = client.RetrieveBearer();
                     this.configuration.Save();
 
-                    this.menu.ShowAuthenticatedMenu(deviceName, false);
+                    this.menu.ShowAuthenticatedMenu(deviceName, false, Disconnect);
+
+                    ni.ShowBalloonTip(2000, "Successful connection", string.Format("Welcome {0} !", username),
+                        ToolTipIcon.Info);
                 }
             }
+            else
+            {
+                ni.ShowBalloonTip(2000, "Connection failed", "Error.",
+                        ToolTipIcon.Error);
+            }
+        }
+
+        private void Disconnect()
+        {
+            this.configuration.Model.Registered = false;
+            this.configuration.Save();
+
+            this.menu.ShowUnauthenticatedMenu();
         }
 
         private async void UpdateLibraryPaths(List<string> paths)
@@ -108,14 +150,14 @@ namespace MusicPickerDeviceApp
         private async Task UpdateLibrary()
         {
             this.library.Erase();
-            this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, true);
+            this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, true, Disconnect);
             foreach (string path in this.configuration.Model.Paths)
             {
                 this.seeker.GetTracks(path);
             }
 
             await this.client.DeviceCollectionSubmit(this.configuration.Model.DeviceId, this.library.Export());
-            this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
+            this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false, Disconnect);
         }
 
         public void Dispose()

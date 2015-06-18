@@ -11,14 +11,18 @@ namespace MusicPickerDeviceApp
 
     public class ContextMenus
     {
-
         public ConnectionForm ConnectionForm;
+        public SignUpForm SignUpForm;
         public LibraryPathsForm LoadForm;
 
         public ContextMenuStrip Menu { get; set; }
         private ToolStripMenuItem ConnectToolStrip;
+        private ToolStripMenuItem SignUpToolStrip;
         private ToolStripMenuItem ExitToolStrip;
         private bool connected = false;
+
+        public delegate void LogoutEvent();
+        private LogoutEvent callback;
 
         public ContextMenus()
         {
@@ -34,8 +38,22 @@ namespace MusicPickerDeviceApp
 
         public void ShowUnauthenticatedMenu()
         {
-            ToolStripMenuItem item;
-            ToolStripSeparator sep;
+            if (Menu.Items.Count > 3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    DeleteMenu(0);
+                }
+            }
+            
+            SignUpToolStrip = new ToolStripMenuItem()
+            {
+                Text = "Sign up",
+                Image = Resources._in, //@todo
+
+            };
+            SignUpToolStrip.Click += new EventHandler(SignUp_Click);
+            Menu.Items.Add(SignUpToolStrip);
 
             ConnectToolStrip = new ToolStripMenuItem()
             {
@@ -50,7 +68,7 @@ namespace MusicPickerDeviceApp
             Menu.Items.Add(ExitToolStrip);
         }
 
-        public void ShowAuthenticatedMenu(string deviceName, bool uploading)
+        public void ShowAuthenticatedMenu(string deviceName, bool uploading, LogoutEvent callback)
         {
             Menu.Items.Clear();
             AddMenu(string.Format("{0}", deviceName), 0, Resources.device, Device_Click);
@@ -67,6 +85,9 @@ namespace MusicPickerDeviceApp
                     Enabled = false
                 });
             }
+
+            AddMenu("Logout", 2, Resources._out, Logout_Click);
+            this.callback = callback;
             
             Menu.Items.Add(ExitToolStrip);
         }
@@ -92,6 +113,11 @@ namespace MusicPickerDeviceApp
             ConnectionForm.ShowDialog();
         }
 
+        void SignUp_Click(object sender, EventArgs e)
+        {
+            SignUpForm.ShowDialog();
+        }
+
         void Load_Click(object sender, EventArgs e)
         {
             LoadForm.ShowDialog();
@@ -99,9 +125,12 @@ namespace MusicPickerDeviceApp
 
         void Device_Click(object sender, EventArgs e)
         {
-            /*connectionForm = new ConnectionForm();
-            Menu.Items.Clear();
-            ShowUnauthenticatedMenu();*/
+            
+        }
+
+        void Logout_Click(object sender, EventArgs e)
+        {
+            this.callback();
         }
 
         void Exit_Click(object sender, EventArgs e)
