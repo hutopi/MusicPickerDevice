@@ -22,6 +22,11 @@ namespace MusicPickerDeviceApp.App
             player.Pause();
         }
 
+        public void Stop()
+        {
+            player.Stop();
+        }
+
         public void SetTrackId(string current)
         {
             player.SetTrack(current);
@@ -31,6 +36,7 @@ namespace MusicPickerDeviceApp.App
         {
             hub.On("Play", Play);
             hub.On("Pause", Pause);
+            hub.On("Stop", Stop);
             hub.On("SetTrackId", (id) => SetTrackId(id));
         }
     }
