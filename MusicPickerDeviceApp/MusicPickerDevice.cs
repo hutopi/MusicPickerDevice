@@ -32,7 +32,7 @@ namespace MusicPickerDeviceApp
                 ConnectionForm = new ConnectionForm(Connect),
                 LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths)
             };
-            client = new ApiClient(new Uri("http://localhost.fiddler:50559"));
+            client = new ApiClient(new Uri("http://localhost:50559"));
         }
 
         public async void Initialize()

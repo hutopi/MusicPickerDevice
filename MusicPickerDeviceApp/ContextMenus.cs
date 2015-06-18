@@ -18,12 +18,20 @@ namespace MusicPickerDeviceApp
 
         public ContextMenuStrip Menu { get; set; }
         private ToolStripMenuItem ConnectToolStrip;
+        private ToolStripMenuItem ExitToolStrip;
         private bool connected = false;
 
         public ContextMenus()
         {
             Menu = new ContextMenuStrip();
             client = new ApiClient(new Uri("http://localhost:50559"));
+
+            ExitToolStrip = new ToolStripMenuItem()
+            {
+                Text = "Exit",
+                Image = Resources.exit
+            };
+            ExitToolStrip.Click += new System.EventHandler(Exit_Click);
         }
 
         public void ShowUnauthenticatedMenu()
@@ -31,27 +39,25 @@ namespace MusicPickerDeviceApp
             ToolStripMenuItem item;
             ToolStripSeparator sep;
 
-            ConnectToolStrip = new ToolStripMenuItem();
-            ConnectToolStrip.Text = "Connect";
-            ConnectToolStrip.Image = Resources._in;
+            ConnectToolStrip = new ToolStripMenuItem()
+            {
+                Text = "Connect",
+                Image = Resources._in,
+                
+            };
             ConnectToolStrip.Click += new EventHandler(Connection_Click);
             Menu.Items.Add(ConnectToolStrip);
 
-            sep = new ToolStripSeparator();
-            Menu.Items.Add(sep);
-
-            item = new ToolStripMenuItem();
-            item.Text = "Exit";
-            item.Image = Resources.exit;
-            item.Click += new System.EventHandler(Exit_Click);
-            Menu.Items.Add(item);
+            Menu.Items.Add(new ToolStripSeparator());
+            Menu.Items.Add(ExitToolStrip);
         }
 
         public void ShowAuthenticatedMenu(string deviceName)
         {
-            Menu.Items.Remove(ConnectToolStrip);
+            Menu.Items.Clear();
             AddMenu(string.Format("{0}", deviceName), 0, Resources.device, Device_Click);
             AddMenu("Upload Music", 1, Resources.upload, Load_Click);
+            Menu.Items.Add(ExitToolStrip);
         }
 
         public void AddMenu(string name, int index, Bitmap img, EventHandler e)
