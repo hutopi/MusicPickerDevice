@@ -26,6 +26,8 @@ namespace MusicPickerDeviceApp
         private HubConnection hubConnection;
         private IHubProxy hubProxy;
 
+        private List<FileWatcher> fileWatchers = new List<FileWatcher>();
+
         public MusicPickerDevice()
         {
             database = new LiteDatabase("musicpicker.db");
@@ -69,6 +71,12 @@ namespace MusicPickerDeviceApp
             {
                 player.AttachNextCallback(async () => await hubProxy.Invoke("Next", this.configuration.Model.DeviceId));
                 await UpdateLibrary();
+
+                foreach (var path in this.configuration.Model.Paths)
+                {
+                    fileWatchers.Add(new FileWatcher(path, AddTrack, DeleteTrack));
+                }
+
                 await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
             }
         }
@@ -158,6 +166,18 @@ namespace MusicPickerDeviceApp
 
             await this.client.DeviceCollectionSubmit(this.configuration.Model.DeviceId, this.library.Export());
             this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false, Disconnect);
+        }
+
+        public void AddTrack(string path)
+        {
+            //@TODO
+            Console.WriteLine(String.Format("File added: Path:{0}", path));
+        }
+
+        public void DeleteTrack(string path)
+        {
+            //@TODO
+            Console.WriteLine(String.Format("File deleted: Path:{0}", path));
         }
 
         public void Dispose()

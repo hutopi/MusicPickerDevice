@@ -73,6 +73,7 @@
     <Compile Include="App\Configuration.cs" />
     <Compile Include="App\Device.cs" />
     <Compile Include="App\DeviceState.cs" />
+    <Compile Include="App\FileWatcher.cs" />
     <Compile Include="App\Hub.cs" />
     <Compile Include="App\HubClient.cs" />
     <Compile Include="App\JsonConverters.cs" />
