@@ -43,7 +43,7 @@ namespace MusicPickerDeviceApp
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false);
                 this.client.ProvideBearer(this.configuration.Model.Bearer);
-                await Task.Run(() => UpdateLibrary());
+                await UpdateLibrary();
             }
             else
             {
@@ -81,7 +81,7 @@ namespace MusicPickerDeviceApp
         {
             this.configuration.Model.Paths = paths;
             this.configuration.Save();
-            await Task.Run(() => UpdateLibrary());
+            await UpdateLibrary();
         }
 
         private async Task UpdateLibrary()
@@ -89,7 +89,7 @@ namespace MusicPickerDeviceApp
             this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, true);
             foreach (string path in this.configuration.Model.Paths)
             {
-                await Task.Run(() => this.seeker.GetTracks(path));
+                this.seeker.GetTracks(path);
             }
 
             await this.client.DeviceCollectionSubmit(this.configuration.Model.DeviceId, this.library.Export());
