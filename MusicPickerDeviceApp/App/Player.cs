@@ -7,61 +7,28 @@ namespace MusicPickerDeviceApp.App
     {
 
         private IWavePlayer waveOutDevice { get; set; }
-        private WaveStream fileWaveStream;
-        private Queue<string> playlist;
+        private Library library;
+        public string CurrentSong { get; set; }
+        public bool Paused { get; set; }
 
-        public Player()
+        public Player(Library library)
         {
             waveOutDevice = new WaveOutEvent();
-            playlist = new Queue<string>();
-        }
-
-        public void AddSong(string path)
-        {
-            playlist.Enqueue(path);
-        }
-
-        public void AddSongs(List<Track> tracks)
-        {
-            foreach (Track t in tracks)
-            {
-                playlist.Enqueue(t.Path);
-            }
-        }
-
-        public void PlaySong()
-        {
-            if (fileWaveStream != null)
-            {
-                fileWaveStream.Dispose();
-            }
-
-            if (playlist.Count < 1)
-            {
-                return;
-            }
-
-            if (waveOutDevice != null && waveOutDevice.PlaybackState != PlaybackState.Stopped)
-            {
-                waveOutDevice.Stop();
-            }
-
-            if (waveOutDevice != null)
-            {
-                waveOutDevice.Dispose();
-                waveOutDevice = null;
-            }
-
+            this.library = library;
             waveOutDevice = new WaveOutEvent();
-            fileWaveStream = new AudioFileReader(playlist.Dequeue());
-            waveOutDevice.Init(fileWaveStream);
-            waveOutDevice.PlaybackStopped += (sender, evn) => { PlaySong(); };
+        }
+
+        public void SetTrack(string trackId)
+        {
+            this.CurrentSong = trackId;
+            Track track = this.library.GetTrack(trackId);
+            WaveStream stream = new AudioFileReader(track.Path);
+            waveOutDevice.Init(stream);
+        }
+
+        public void Play()
+        {
             waveOutDevice.Play();
-        }
-
-        public void Stop()
-        {
-            waveOutDevice.Stop();
         }
 
         public void Pause()

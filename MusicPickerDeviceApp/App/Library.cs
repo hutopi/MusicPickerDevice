@@ -9,7 +9,7 @@ namespace MusicPickerDeviceApp.App
     public class Library
     {
         private LiteDatabase database;
-        private LiteCollection<Track> tracks;
+        public LiteCollection<Track> tracks;
 
         public Library(LiteDatabase database)
         {

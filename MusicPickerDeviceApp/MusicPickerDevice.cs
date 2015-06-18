@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,11 +40,11 @@ namespace MusicPickerDeviceApp
             };
 
             player = new Player(library);
-            player.Play();
 
             client = new ApiClient(new Uri("http://localhost:50559"));
             hubConnection = new HubConnection("http://localhost:50559");
             hubProxy = hubConnection.CreateHubProxy("MusicHub");
+            new HubClient(player).AttachToHub(hubProxy);
         }
 
         public async void Initialize()
@@ -67,6 +68,9 @@ namespace MusicPickerDeviceApp
                 await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
                 await UpdateLibrary();
             }
+
+            await hubProxy.Invoke("Queue", this.configuration.Model.DeviceId, new int[] {33});
+            await hubProxy.Invoke("Next", this.configuration.Model.DeviceId);
         }
 
         public void Display()

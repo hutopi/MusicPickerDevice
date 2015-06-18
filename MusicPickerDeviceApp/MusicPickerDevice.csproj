@@ -74,6 +74,7 @@
     <Compile Include="App\Device.cs" />
     <Compile Include="App\DeviceState.cs" />
     <Compile Include="App\Hub.cs" />
+    <Compile Include="App\HubClient.cs" />
     <Compile Include="App\JsonConverters.cs" />
     <Compile Include="App\Library.cs" />
     <Compile Include="App\Player.cs" />
