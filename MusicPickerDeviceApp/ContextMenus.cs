@@ -52,11 +52,24 @@ namespace MusicPickerDeviceApp
             Menu.Items.Add(ExitToolStrip);
         }
 
-        public void ShowAuthenticatedMenu(string deviceName)
+        public void ShowAuthenticatedMenu(string deviceName, bool uploading)
         {
             Menu.Items.Clear();
             AddMenu(string.Format("{0}", deviceName), 0, Resources.device, Device_Click);
-            AddMenu("Upload Music", 1, Resources.upload, Load_Click);
+
+            if (!uploading)
+            {
+                AddMenu("Upload Music", 1, Resources.upload, Load_Click);
+            }
+            else
+            {
+                Menu.Items.Insert(1, new ToolStripMenuItem()
+                {
+                    Text = "Uploading...",
+                    Enabled = false
+                });
+            }
+            
             Menu.Items.Add(ExitToolStrip);
         }
 
