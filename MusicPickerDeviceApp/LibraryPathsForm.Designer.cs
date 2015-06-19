@@ -33,6 +33,8 @@
             this.buttonLoad = new System.Windows.Forms.Button();
             this.foldersLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.Box = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,13 +77,36 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(425, 100);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
+            // Box
+            // 
+            this.Box.FormattingEnabled = true;
+            this.Box.HorizontalScrollbar = true;
+            this.Box.ItemHeight = 16;
+            this.Box.Location = new System.Drawing.Point(24, 178);
+            this.Box.Name = "Box";
+            this.Box.Size = new System.Drawing.Size(425, 132);
+            this.Box.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(374, 339);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 29);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LibraryPathsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(461, 163);
+            this.ClientSize = new System.Drawing.Size(461, 371);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Box);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.folder);
@@ -102,5 +127,7 @@
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Label foldersLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ListBox Box;
+        private System.Windows.Forms.Button button1;
     }
 }

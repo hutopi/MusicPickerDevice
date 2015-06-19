@@ -41,11 +41,24 @@ namespace MusicPickerDeviceApp
 
         private void LibraryPathsForm_Load(object sender, EventArgs e)
         {
-            foreach (var path in this.configuration.Paths)
+            foldersLabel.Text = "";
+            this.Box.Items.Clear();
+            foreach (var path in configuration.Paths)
             {
-                foldersLabel.Text += string.Format("- (Added) {0} \n", path);
+                this.Box.Items.Add(new TextBox()
+                {
+                    Text = string.Format(path)
+                }.Text);
             }
-            foldersLabel.Text += "\n";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var path = this.Box.SelectedItem;
+            configuration.Paths.Remove((string) path);
+
+            callback(configuration.Paths);
+            Box.Items.Remove(path);
         }
     }
 }
