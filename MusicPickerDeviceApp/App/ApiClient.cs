@@ -156,6 +156,22 @@ namespace MusicPickerDeviceApp.App
             return JsonConvert.DeserializeObject<List<Device>>(result.Content.ReadAsStringAsync().Result);
         }
 
+        public int DeviceGetIdByName(string name)
+        {
+            Uri uri = new Uri(endpoint, string.Format("/api/Devices?name={0}", name));
+            HttpResponseMessage result = (new HttpClient()
+            {
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+            }).GetAsync(uri).Result;
+
+            if (!result.IsSuccessStatusCode)
+            {
+                return -1; // @TODO exception
+            }
+
+            return JsonConvert.DeserializeObject<Device>(result.Content.ReadAsStringAsync().Result).Id;
+        }
+
         public Album DevicesGetAlbum(int albumId)
         {
             Uri uri = new Uri(endpoint, string.Format("/api/Albums/{0}", albumId));

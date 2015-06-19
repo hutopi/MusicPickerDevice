@@ -114,11 +114,21 @@ namespace MusicPickerDeviceApp
             
         }
 
-        private void Connect(string username, string deviceName, string password)
+        private async void Connect(string username, string deviceName, string password)
         {
             if (client.LogIn(username, password))
             {
-                int deviceId = client.DeviceAdd(deviceName);
+                int searchId = client.DeviceGetIdByName(deviceName);
+                int deviceId = 0;
+                if (searchId != -1)
+                {
+                    deviceId = searchId;
+                }
+                else
+                {
+                    deviceId = client.DeviceAdd(deviceName);
+                }
+
                 if (deviceId != -1)
                 {
                     this.configuration.Model.Registered = true;
@@ -131,6 +141,9 @@ namespace MusicPickerDeviceApp
 
                     ni.ShowBalloonTip(2000, "Successful connection", string.Format("Welcome {0} !", username),
                         ToolTipIcon.Info);
+
+                    await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
+                    await UpdateLibrary();
                 }
             }
             else
@@ -142,10 +155,20 @@ namespace MusicPickerDeviceApp
 
         private void Disconnect()
         {
-            this.configuration.Model.Registered = false;
-            this.configuration.Save();
-
+            this.resetConfiguration();
+            this.menu.LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths);
+            this.menu.SignUpForm = new SignUpForm(SignUp);
+            this.menu.ConnectionForm = new ConnectionForm(Connect);
             this.menu.ShowUnauthenticatedMenu();
+        }
+
+        private void resetConfiguration()
+        {
+            this.configuration.Model.Registered = false;
+            this.configuration.Model.Bearer = "";
+            this.configuration.Model.DeviceId = 0;
+            this.configuration.Model.DeviceName = "";
+            this.configuration.Save();
         }
 
         private async void UpdateLibraryPaths(List<string> paths)
