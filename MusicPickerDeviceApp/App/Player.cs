@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using NAudio.Wave;
 
 namespace MusicPickerDeviceApp.App
@@ -10,6 +11,7 @@ namespace MusicPickerDeviceApp.App
         private Library library;
         public string CurrentSong { get; set; }
         public delegate void NextTrackEvent();
+        private NextTrackEvent nextCallback;
 
         public Player(Library library)
         {
@@ -22,13 +24,27 @@ namespace MusicPickerDeviceApp.App
         {
             this.CurrentSong = trackId;
             Track track = this.library.GetTrack(trackId);
-            WaveStream stream = new AudioFileReader(track.Path);
-            waveOutDevice.Init(stream);
+            if (track != null)
+            {
+                WaveStream stream = new AudioFileReader(track.Path);
+                waveOutDevice.Init(stream);
+            }
+            else
+            {
+                nextCallback();
+            }
         }
 
         public void Play()
         {
-            waveOutDevice.Play();
+            try
+            {
+                waveOutDevice.Play();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         public void Pause()
@@ -43,6 +59,7 @@ namespace MusicPickerDeviceApp.App
 
         public void AttachNextCallback(NextTrackEvent nextCallback)
         {
+            this.nextCallback = nextCallback;
             waveOutDevice.PlaybackStopped += (sender, ev) => nextCallback();
         }
     }
