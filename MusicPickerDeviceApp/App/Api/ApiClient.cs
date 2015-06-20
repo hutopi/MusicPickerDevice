@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Mime;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.XPath;
+using MusicPickerDeviceApp.App.Api.Util;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
 
 namespace MusicPickerDeviceApp.App
 {

@@ -67,11 +67,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\Album.cs" />
-    <Compile Include="App\ApiClient.cs" />
-    <Compile Include="App\Artist.cs" />
+    <Compile Include="App\Api\Util\Album.cs" />
+    <Compile Include="App\Api\ApiClient.cs" />
+    <Compile Include="App\Api\Util\Artist.cs" />
+    <Compile Include="App\Api\Util\Track.cs" />
     <Compile Include="App\Configuration.cs" />
-    <Compile Include="App\Device.cs" />
+    <Compile Include="App\Api\Util\Device.cs" />
     <Compile Include="App\DeviceState.cs" />
     <Compile Include="App\FileWatcher.cs" />
     <Compile Include="App\Hub.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="App\Library.cs" />
     <Compile Include="App\Player.cs" />
     <Compile Include="App\Seeker.cs" />
-    <Compile Include="App\Track.cs" />
+    <Compile Include="App\LibraryTrack.cs" />
     <Compile Include="ConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>

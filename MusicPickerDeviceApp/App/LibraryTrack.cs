@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace MusicPickerDeviceApp.App
 {
-    public class Track
+    public class LibraryTrack
     {
         [JsonConverter(typeof(ToStringJsonConverter))]
         public ObjectId Id { get; set; }

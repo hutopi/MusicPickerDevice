@@ -23,7 +23,7 @@ namespace MusicPickerDeviceApp.App
         public void SetTrack(string trackId)
         {
             this.CurrentSong = trackId;
-            Track track = this.library.GetTrack(trackId);
+            LibraryTrack track = this.library.GetTrack(trackId);
             if (track != null)
             {
                 WaveStream stream = new AudioFileReader(track.Path);

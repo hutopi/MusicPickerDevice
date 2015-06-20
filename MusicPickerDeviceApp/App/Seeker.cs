@@ -24,14 +24,14 @@ namespace MusicPickerDeviceApp.App
 
         public void GetTracks(string directory)
         {
-            List<Track> tracks = new List<Track>();
+            List<LibraryTrack> tracks = new List<LibraryTrack>();
 
             foreach (string filePath in IteratePaths(directory))
             {
                 try
                 {
                     TagLib.File tagFile = TagLib.File.Create(filePath);
-                    tracks.Add(new Track()
+                    tracks.Add(new LibraryTrack()
                     {
                         Artist = tagFile.Tag.FirstArtist,
                         Album = tagFile.Tag.Album,

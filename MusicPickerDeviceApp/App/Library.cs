@@ -9,26 +9,26 @@ namespace MusicPickerDeviceApp.App
     public class Library
     {
         private LiteDatabase database;
-        public LiteCollection<Track> tracks;
+        public LiteCollection<LibraryTrack> tracks;
 
         public Library(LiteDatabase database)
         {
             this.database = database;
-            this.tracks = this.database.GetCollection<Track>("tracks");
+            this.tracks = this.database.GetCollection<LibraryTrack>("tracks");
         }
 
-        public string AddTrack(Track track)
+        public string AddTrack(LibraryTrack track)
         {
             this.tracks.Insert(track);
             return track.Id.ToString();
         }
 
-        public void AddTracks(List<Track> tracks)
+        public void AddTracks(List<LibraryTrack> tracks)
         {
             this.tracks.InsertBulk(tracks);
         }
 
-        public Track GetTrack(string id)
+        public LibraryTrack GetTrack(string id)
         {
             return this.tracks.FindById(new ObjectId(id));
         }
