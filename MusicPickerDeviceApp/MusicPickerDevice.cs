@@ -210,6 +210,7 @@ namespace MusicPickerDeviceApp
 
         public void Dispose()
         {
+            hubConnection.Stop();
             ni.Dispose();
         }
 
