@@ -6,7 +6,6 @@ namespace MusicPickerDeviceApp.App
 {
     public class Player
     {
-
         private IWavePlayer waveOutDevice { get; set; }
         private Library library;
         public string CurrentSong { get; set; }
@@ -21,7 +20,6 @@ namespace MusicPickerDeviceApp.App
 
         public void SetTrack(string trackId)
         {
-            Console.WriteLine("SET TRACK");
             this.CurrentSong = trackId;
             Track track = this.library.GetTrack(trackId);
             WaveStream stream = new AudioFileReader(track.Path);
@@ -30,13 +28,11 @@ namespace MusicPickerDeviceApp.App
 
         public void Play()
         {
-            Console.WriteLine("PLAY");
             waveOutDevice.Play();
         }
 
         public void Pause()
         {
-            Console.WriteLine("PAUSE");
             waveOutDevice.Pause();
         }
 

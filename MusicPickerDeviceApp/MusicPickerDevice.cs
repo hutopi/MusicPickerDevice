@@ -59,13 +59,13 @@ namespace MusicPickerDeviceApp
             {
                 this.menu.ShowAuthenticatedMenu(this.configuration.Model.DeviceName, false, Disconnect);
                 this.client.ProvideBearer(this.configuration.Model.Bearer);
+                hubConnection.Headers.Add("Authorization", "Bearer " + this.configuration.Model.Bearer);
+                await hubConnection.Start();
             }
             else
             {
                 this.menu.ShowUnauthenticatedMenu();
             }
-
-            await hubConnection.Start();
 
             if (this.configuration.Model.Registered)
             {
@@ -142,8 +142,11 @@ namespace MusicPickerDeviceApp
                     ni.ShowBalloonTip(2000, "Successful connection", string.Format("Welcome {0} !", username),
                         ToolTipIcon.Info);
 
-                    await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
                     await UpdateLibrary();
+                    
+                    hubConnection.Headers.Add("Authorization", "Bearer " + this.configuration.Model.Bearer);
+                    await hubConnection.Start();
+                    await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
                 }
             }
             else
@@ -155,6 +158,8 @@ namespace MusicPickerDeviceApp
 
         private void Disconnect()
         {
+            hubConnection.Headers.Remove("Authorization");
+            hubConnection.Stop();
             this.resetConfiguration();
             this.menu.LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths);
             this.menu.SignUpForm = new SignUpForm(SignUp);
