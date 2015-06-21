@@ -32,7 +32,7 @@ namespace MusicPickerDeviceApp.App
         /// <summary>
         /// The extensions for the searched files
         /// </summary>
-        private string[] extensions = { ".mp3", ".wav", ".flac"};
+        private string[] extensions = { ".mp3", ".wav", ".flac" };
         /// <summary>
         /// The path of the inspected folder
         /// </summary>
@@ -80,7 +80,7 @@ namespace MusicPickerDeviceApp.App
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="FileSystemEventArgs"/> instance containing the event data.</param>
-       public void FileWatcherCreated(object sender, FileSystemEventArgs e)
+        public void FileWatcherCreated(object sender, FileSystemEventArgs e)
         {
             var ext = (Path.GetExtension(e.FullPath) ?? string.Empty).ToLower();
 
@@ -90,11 +90,11 @@ namespace MusicPickerDeviceApp.App
             }
         }
 
-       /// <summary>
-       /// Called when a file is deleted from the folder
-       /// </summary>
-       /// <param name="sender">The sender.</param>
-       /// <param name="e">The <see cref="FileSystemEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Called when a file is deleted from the folder
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="FileSystemEventArgs"/> instance containing the event data.</param>
         public void FileWatcherDeleted(object sender, FileSystemEventArgs e)
         {
             var ext = (Path.GetExtension(e.FullPath) ?? string.Empty).ToLower();

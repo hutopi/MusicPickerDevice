@@ -57,7 +57,7 @@ namespace MusicPickerDeviceApp.App
         public bool SignUp(string username, string password)
         {
             Uri uri = new Uri(endpoint, "/api/Account/Register");
-            HttpContent content = new FormUrlEncodedContent(new []
+            HttpContent content = new FormUrlEncodedContent(new[]
             {
                 new KeyValuePair<string, string>("Username", username),
                 new KeyValuePair<string, string>("Password", password),
@@ -116,7 +116,7 @@ namespace MusicPickerDeviceApp.App
 
             Dictionary<string, string> data =
                 JsonConvert.DeserializeObject<Dictionary<string, string>>(result.Content.ReadAsStringAsync().Result);
-           
+
             ProvideBearer(data["access_token"]);
             return true;
         }
@@ -136,7 +136,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer)}
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
             }).PostAsync(uri, content).Result;
             if (!result.IsSuccessStatusCode)
             {
@@ -164,7 +164,7 @@ namespace MusicPickerDeviceApp.App
             }).DeleteAsync(uri).Result;
             if (!result.IsSuccessStatusCode)
             {
-                return false; 
+                return false;
             }
 
             return true;
@@ -182,7 +182,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpContent content = new StringContent(collection)
             {
-                Headers = { ContentType = new MediaTypeHeaderValue("application/json")}
+                Headers = { ContentType = new MediaTypeHeaderValue("application/json") }
             };
 
             HttpResponseMessage result = await (new HttpClient()
@@ -411,7 +411,7 @@ namespace MusicPickerDeviceApp.App
             }
 
             return JsonConvert.DeserializeObject<List<Artist>>(result.Content.ReadAsStringAsync().Result);
-        } 
+        }
 
     }
 }

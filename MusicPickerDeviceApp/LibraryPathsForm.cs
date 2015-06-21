@@ -104,7 +104,7 @@ namespace MusicPickerDeviceApp
         private void button1_Click(object sender, EventArgs e)
         {
             var path = this.Box.SelectedItem;
-            configuration.Paths.Remove((string) path);
+            configuration.Paths.Remove((string)path);
 
             callback(configuration.Paths);
             Box.Items.Remove(path);

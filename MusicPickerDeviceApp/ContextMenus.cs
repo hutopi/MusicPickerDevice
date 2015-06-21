@@ -96,7 +96,7 @@ namespace MusicPickerDeviceApp
                     DeleteMenu(0);
                 }
             }
-            
+
             signUpToolStrip = new ToolStripMenuItem()
             {
                 Text = "Sign up",
@@ -110,7 +110,7 @@ namespace MusicPickerDeviceApp
             {
                 Text = "Connect",
                 Image = Resources._in,
-                
+
             };
             connectToolStrip.Click += new EventHandler(Connection_Click);
             Menu.Items.Add(connectToolStrip);
@@ -145,7 +145,7 @@ namespace MusicPickerDeviceApp
 
             AddMenu("Logout", 2, Resources._out, Logout_Click);
             this.callback = callback;
-            
+
             Menu.Items.Add(exitToolStrip);
         }
 
@@ -213,7 +213,7 @@ namespace MusicPickerDeviceApp
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         void Device_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         /// <summary>

@@ -144,7 +144,7 @@ namespace MusicPickerDeviceApp
             notifyIcon.Icon = Resources.icon;
             notifyIcon.Text = "Music Picker";
             notifyIcon.Visible = true;
-            
+
 
             notifyIcon.ContextMenuStrip = menu.Menu;
         }
@@ -175,7 +175,7 @@ namespace MusicPickerDeviceApp
                 notifyIcon.ShowBalloonTip(2000, "Registration failed", "The passwords are different",
                         ToolTipIcon.Warning);
             }
-            
+
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace MusicPickerDeviceApp
                         ToolTipIcon.Info);
 
                     await UpdateLibrary();
-                    
+
                     hubConnection.Headers.Add("Authorization", "Bearer " + this.configuration.Model.Bearer);
                     await hubConnection.Start();
                     await hubProxy.Invoke("RegisterDevice", this.configuration.Model.DeviceId);
