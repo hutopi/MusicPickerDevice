@@ -6,6 +6,7 @@ namespace MusicPickerDeviceApp.App
     {
         private IWavePlayer waveOutDevice { get; set; }
         private Library library;
+
         public string CurrentSong { get; set; }
         public delegate void NextTrackEvent();
         private NextTrackEvent nextCallback;

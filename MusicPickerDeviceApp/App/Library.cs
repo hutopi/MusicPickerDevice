@@ -7,48 +7,49 @@ namespace MusicPickerDeviceApp.App
     public class Library
     {
         private LiteDatabase database;
-        public LiteCollection<LibraryTrack> tracks;
+
+        public LiteCollection<LibraryTrack> Tracks;
 
         public Library(LiteDatabase database)
         {
             this.database = database;
-            this.tracks = this.database.GetCollection<LibraryTrack>("tracks");
+            this.Tracks = this.database.GetCollection<LibraryTrack>("Tracks");
         }
 
         public string AddTrack(LibraryTrack track)
         {
-            this.tracks.Insert(track);
+            this.Tracks.Insert(track);
             return track.Id.ToString();
         }
 
         public void AddTracks(List<LibraryTrack> tracks)
         {
-            this.tracks.InsertBulk(tracks);
+            this.Tracks.InsertBulk(tracks);
         }
 
         public LibraryTrack GetTrack(string id)
         {
-            return this.tracks.FindById(new ObjectId(id));
+            return this.Tracks.FindById(new ObjectId(id));
         }
 
         public bool DeleteTrack(string id)
         {
-            return this.tracks.Delete(new ObjectId(id));
+            return this.Tracks.Delete(new ObjectId(id));
         }
 
         public bool IsPathPresent(string path)
         {
-            return this.tracks.Exists(Query.EQ("Path", path));
+            return this.Tracks.Exists(Query.EQ("Path", path));
         }
 
         public bool Erase()
         {
-            return this.tracks.Drop();
+            return this.Tracks.Drop();
         }
 
         public string Export()
         {
-            return JsonConvert.SerializeObject(this.tracks.FindAll());
+            return JsonConvert.SerializeObject(this.Tracks.FindAll());
         }
     }
 }

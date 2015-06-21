@@ -11,11 +11,11 @@ namespace MusicPickerDeviceApp
         public ConnectionForm ConnectionForm;
         public SignUpForm SignUpForm;
         public LibraryPathsForm LoadForm;
-
         public ContextMenuStrip Menu { get; set; }
-        private ToolStripMenuItem ConnectToolStrip;
-        private ToolStripMenuItem SignUpToolStrip;
-        private ToolStripMenuItem ExitToolStrip;
+
+        private ToolStripMenuItem connectToolStrip;
+        private ToolStripMenuItem signUpToolStrip;
+        private ToolStripMenuItem exitToolStrip;
 
         public delegate void LogoutEvent();
         private LogoutEvent callback;
@@ -24,12 +24,12 @@ namespace MusicPickerDeviceApp
         {
             Menu = new ContextMenuStrip();
 
-            ExitToolStrip = new ToolStripMenuItem()
+            exitToolStrip = new ToolStripMenuItem()
             {
                 Text = "Exit",
                 Image = Resources.exit
             };
-            ExitToolStrip.Click += new System.EventHandler(Exit_Click);
+            exitToolStrip.Click += new System.EventHandler(Exit_Click);
         }
 
         public void ShowUnauthenticatedMenu()
@@ -42,26 +42,26 @@ namespace MusicPickerDeviceApp
                 }
             }
             
-            SignUpToolStrip = new ToolStripMenuItem()
+            signUpToolStrip = new ToolStripMenuItem()
             {
                 Text = "Sign up",
                 Image = Resources._in,
 
             };
-            SignUpToolStrip.Click += new EventHandler(SignUp_Click);
-            Menu.Items.Add(SignUpToolStrip);
+            signUpToolStrip.Click += new EventHandler(SignUp_Click);
+            Menu.Items.Add(signUpToolStrip);
 
-            ConnectToolStrip = new ToolStripMenuItem()
+            connectToolStrip = new ToolStripMenuItem()
             {
                 Text = "Connect",
                 Image = Resources._in,
                 
             };
-            ConnectToolStrip.Click += new EventHandler(Connection_Click);
-            Menu.Items.Add(ConnectToolStrip);
+            connectToolStrip.Click += new EventHandler(Connection_Click);
+            Menu.Items.Add(connectToolStrip);
 
             Menu.Items.Add(new ToolStripSeparator());
-            Menu.Items.Add(ExitToolStrip);
+            Menu.Items.Add(exitToolStrip);
         }
 
         public void ShowAuthenticatedMenu(string deviceName, bool uploading, LogoutEvent callback)
@@ -85,7 +85,7 @@ namespace MusicPickerDeviceApp
             AddMenu("Logout", 2, Resources._out, Logout_Click);
             this.callback = callback;
             
-            Menu.Items.Add(ExitToolStrip);
+            Menu.Items.Add(exitToolStrip);
         }
 
         public void AddMenu(string name, int index, Bitmap img, EventHandler e)

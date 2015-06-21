@@ -3,9 +3,11 @@ using System.Windows.Forms;
 
 namespace MusicPickerDeviceApp
 {
+    /// <summary>
+    /// Main class of the program.
+    /// </summary>
     static class Program
     {
-
         [STAThread]
         static void Main()
         {

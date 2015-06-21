@@ -11,7 +11,7 @@ namespace MusicPickerDeviceApp
 {
     public class MusicPickerDevice : IDisposable
     {
-        NotifyIcon ni;
+        private NotifyIcon notifyIcon;
         private ContextMenus menu;
         private LiteDatabase database;
         private Configuration configuration;
@@ -21,7 +21,6 @@ namespace MusicPickerDeviceApp
         private Player player;
         private HubConnection hubConnection;
         private IHubProxy hubProxy;
-
         private List<FileWatcher> fileWatchers = new List<FileWatcher>();
 
         public MusicPickerDevice()
@@ -30,7 +29,7 @@ namespace MusicPickerDeviceApp
             configuration = new Configuration();
             library = new Library(database);
             seeker = new Seeker(library, new[] { "mp3", "wav" });
-            ni = new NotifyIcon();
+            notifyIcon = new NotifyIcon();
             menu = new ContextMenus()
             {
                 SignUpForm = new SignUpForm(SignUp),
@@ -79,12 +78,12 @@ namespace MusicPickerDeviceApp
 
         public void Display()
         {
-            ni.Icon = Resources.icon;
-            ni.Text = "Music Picker";
-            ni.Visible = true;
+            notifyIcon.Icon = Resources.icon;
+            notifyIcon.Text = "Music Picker";
+            notifyIcon.Visible = true;
             
 
-            ni.ContextMenuStrip = menu.Menu;
+            notifyIcon.ContextMenuStrip = menu.Menu;
         }
 
         private void SignUp(string username, string password, string confirmpassword)
@@ -93,18 +92,18 @@ namespace MusicPickerDeviceApp
             {
                 if (client.SignUp(username, password))
                 {
-                    ni.ShowBalloonTip(2000, "Successful registration", string.Format("Welcome {0} !", username),
+                    notifyIcon.ShowBalloonTip(2000, "Successful registration", string.Format("Welcome {0} !", username),
                         ToolTipIcon.Info);
                 }
                 else
                 {
-                    ni.ShowBalloonTip(2000, "Registration failed", "Server error",
+                    notifyIcon.ShowBalloonTip(2000, "Registration failed", "Server error",
                         ToolTipIcon.Error);
                 }
             }
             else
             {
-                ni.ShowBalloonTip(2000, "Registration failed", "The passwords are different",
+                notifyIcon.ShowBalloonTip(2000, "Registration failed", "The passwords are different",
                         ToolTipIcon.Warning);
             }
             
@@ -135,7 +134,7 @@ namespace MusicPickerDeviceApp
 
                     this.menu.ShowAuthenticatedMenu(deviceName, false, Disconnect);
 
-                    ni.ShowBalloonTip(2000, "Successful connection", string.Format("Welcome {0} !", username),
+                    notifyIcon.ShowBalloonTip(2000, "Successful connection", string.Format("Welcome {0} !", username),
                         ToolTipIcon.Info);
 
                     await UpdateLibrary();
@@ -147,7 +146,7 @@ namespace MusicPickerDeviceApp
             }
             else
             {
-                ni.ShowBalloonTip(2000, "Connection failed", "Error.",
+                notifyIcon.ShowBalloonTip(2000, "Connection failed", "Error.",
                         ToolTipIcon.Error);
             }
         }
@@ -156,14 +155,14 @@ namespace MusicPickerDeviceApp
         {
             hubConnection.Headers.Remove("Authorization");
             hubConnection.Stop();
-            this.resetConfiguration();
+            this.ResetConfiguration();
             this.menu.LoadForm = new LibraryPathsForm(configuration.Model, UpdateLibraryPaths);
             this.menu.SignUpForm = new SignUpForm(SignUp);
             this.menu.ConnectionForm = new ConnectionForm(Connect);
             this.menu.ShowUnauthenticatedMenu();
         }
 
-        private void resetConfiguration()
+        private void ResetConfiguration()
         {
             this.configuration.Model.Registered = false;
             this.configuration.Model.Bearer = "";
@@ -207,7 +206,7 @@ namespace MusicPickerDeviceApp
         public void Dispose()
         {
             hubConnection.Stop();
-            ni.Dispose();
+            notifyIcon.Dispose();
         }
 
     }

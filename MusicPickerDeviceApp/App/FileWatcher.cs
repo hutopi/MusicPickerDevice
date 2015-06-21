@@ -20,12 +20,12 @@ namespace MusicPickerDeviceApp.App
             this.callbackAdded = add;
             this.callbackDeleted = delete;
             fileWatcher = new FileSystemWatcher(path, "*.*");
-            fileWatcher.Created += new FileSystemEventHandler(fileWatcherCreated);
-            fileWatcher.Deleted += new FileSystemEventHandler(fileWatcherDeleted);
+            fileWatcher.Created += new FileSystemEventHandler(FileWatcherCreated);
+            fileWatcher.Deleted += new FileSystemEventHandler(FileWatcherDeleted);
             fileWatcher.EnableRaisingEvents = true;
         }
 
-        void fileWatcherCreated(object sender, FileSystemEventArgs e)
+       public void FileWatcherCreated(object sender, FileSystemEventArgs e)
         {
             var ext = (Path.GetExtension(e.FullPath) ?? string.Empty).ToLower();
 
@@ -35,7 +35,7 @@ namespace MusicPickerDeviceApp.App
             }
         }
 
-        void fileWatcherDeleted(object sender, FileSystemEventArgs e)
+        public void FileWatcherDeleted(object sender, FileSystemEventArgs e)
         {
             var ext = (Path.GetExtension(e.FullPath) ?? string.Empty).ToLower();
 
