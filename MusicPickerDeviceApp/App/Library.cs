@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LiteDB;
-using NAudio.CoreAudioApi.Interfaces;
 using Newtonsoft.Json;
 
 namespace MusicPickerDeviceApp.App

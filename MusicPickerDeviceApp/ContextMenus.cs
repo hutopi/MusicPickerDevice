@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 using MusicPickerDeviceApp.Properties;
 using System.Drawing;
-using MusicPickerDeviceApp.App;
-using LiteDB;
 
 namespace MusicPickerDeviceApp
 {
@@ -19,7 +16,6 @@ namespace MusicPickerDeviceApp
         private ToolStripMenuItem ConnectToolStrip;
         private ToolStripMenuItem SignUpToolStrip;
         private ToolStripMenuItem ExitToolStrip;
-        private bool connected = false;
 
         public delegate void LogoutEvent();
         private LogoutEvent callback;
@@ -49,7 +45,7 @@ namespace MusicPickerDeviceApp
             SignUpToolStrip = new ToolStripMenuItem()
             {
                 Text = "Sign up",
-                Image = Resources._in, //@todo
+                Image = Resources._in,
 
             };
             SignUpToolStrip.Click += new EventHandler(SignUp_Click);

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNet.SignalR.Client;
+﻿using Microsoft.AspNet.SignalR.Client;
 
 namespace MusicPickerDeviceApp.App
 {

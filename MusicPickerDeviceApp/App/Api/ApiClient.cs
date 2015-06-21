@@ -86,7 +86,7 @@ namespace MusicPickerDeviceApp.App
             }).PostAsync(uri, content).Result;
             if (!result.IsSuccessStatusCode)
             {
-                return -1; // Exception @TODO
+                return -1;
             }
 
             Dictionary<string, string> data =
@@ -144,7 +144,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Device>>(result.Content.ReadAsStringAsync().Result);
@@ -160,7 +160,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return -1; // @TODO exception
+                return -1;
             }
 
             return JsonConvert.DeserializeObject<Device>(result.Content.ReadAsStringAsync().Result).Id;
@@ -177,7 +177,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<Album>(result.Content.ReadAsStringAsync().Result);
@@ -194,7 +194,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Album>>(result.Content.ReadAsStringAsync().Result);
@@ -211,7 +211,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Album>>(result.Content.ReadAsStringAsync().Result);
@@ -227,7 +227,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Track>>(result.Content.ReadAsStringAsync().Result);
@@ -243,7 +243,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<Track>(result.Content.ReadAsStringAsync().Result);
@@ -259,7 +259,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Track>>(result.Content.ReadAsStringAsync().Result);
@@ -275,7 +275,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<Artist>(result.Content.ReadAsStringAsync().Result);
@@ -291,7 +291,7 @@ namespace MusicPickerDeviceApp.App
 
             if (!result.IsSuccessStatusCode)
             {
-                return null; // @TODO exception
+                return null;
             }
 
             return JsonConvert.DeserializeObject<List<Artist>>(result.Content.ReadAsStringAsync().Result);

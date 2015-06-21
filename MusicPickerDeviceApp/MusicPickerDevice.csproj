@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MP.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiteDB">
       <HintPath>..\packages\LiteDB.1.0.2\lib\net40\LiteDB.dll</HintPath>
@@ -75,7 +78,6 @@
     <Compile Include="App\Api\Util\Device.cs" />
     <Compile Include="App\DeviceState.cs" />
     <Compile Include="App\FileWatcher.cs" />
-    <Compile Include="App\Hub.cs" />
     <Compile Include="App\HubClient.cs" />
     <Compile Include="App\JsonConverters.cs" />
     <Compile Include="App\Library.cs" />
@@ -157,6 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\device.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MP.ico" />
+    <Content Include="Resources\form.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

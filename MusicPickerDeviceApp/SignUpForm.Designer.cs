@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUpForm));
             this.button1 = new System.Windows.Forms.Button();
             this.Username = new System.Windows.Forms.TextBox();
             this.Password = new System.Windows.Forms.TextBox();
@@ -111,6 +112,7 @@
             this.Controls.Add(this.Username);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SignUpForm";
             this.Text = "Music Picker - Sign up";
             this.ResumeLayout(false);

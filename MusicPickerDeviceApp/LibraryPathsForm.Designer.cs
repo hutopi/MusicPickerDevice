@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryPathsForm));
             this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
             this.folder = new System.Windows.Forms.LinkLabel();
             this.buttonLoad = new System.Windows.Forms.Button();
@@ -110,6 +111,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.folder);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LibraryPathsForm";
             this.Text = "Music Picker - Load";
             this.Load += new System.EventHandler(this.LibraryPathsForm_Load);

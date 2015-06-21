@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 
 namespace MusicPickerDeviceApp.App
 {
