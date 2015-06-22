@@ -80,7 +80,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns>System.String.</returns>
         public string RetrieveBearer()
         {
-            return this.bearer;
+            return bearer;
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).PostAsync(uri, content).Result;
             if (!result.IsSuccessStatusCode)
             {
@@ -160,7 +160,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).DeleteAsync(uri).Result;
             if (!result.IsSuccessStatusCode)
             {
@@ -187,7 +187,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = await (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).PostAsync(uri, content);
 
             if (!result.IsSuccessStatusCode)
@@ -208,7 +208,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -229,7 +229,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Devices?name={0}", name));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -251,7 +251,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -273,7 +273,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -296,7 +296,7 @@ namespace MusicPickerDeviceApp.App
 
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -317,7 +317,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Tracks?device={0}", deviceId));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -338,7 +338,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Tracks/{0}", trackId));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -360,7 +360,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Tracks?device={0}&album={1}}", deviceId, albumId));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -381,7 +381,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Artists/{0}", artistId));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)
@@ -402,7 +402,7 @@ namespace MusicPickerDeviceApp.App
             Uri uri = new Uri(endpoint, string.Format("/api/Artists?device={0}", deviceId));
             HttpResponseMessage result = (new HttpClient()
             {
-                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", this.bearer) }
+                DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", bearer) }
             }).GetAsync(uri).Result;
 
             if (!result.IsSuccessStatusCode)

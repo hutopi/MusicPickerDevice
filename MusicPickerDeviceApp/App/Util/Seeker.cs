@@ -90,7 +90,7 @@ namespace MusicPickerDeviceApp.App
                 }
             }
 
-            this.library.AddTracks(tracks);
+            library.AddTracks(tracks);
         }
     }
 }

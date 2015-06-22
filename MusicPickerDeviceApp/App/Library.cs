@@ -43,7 +43,7 @@ namespace MusicPickerDeviceApp.App
         public Library(LiteDatabase database)
         {
             this.database = database;
-            this.Tracks = this.database.GetCollection<LibraryTrack>("Tracks");
+            Tracks = this.database.GetCollection<LibraryTrack>("Tracks");
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns>System.String.</returns>
         public string AddTrack(LibraryTrack track)
         {
-            this.Tracks.Insert(track);
+            Tracks.Insert(track);
             return track.Id.ToString();
         }
 
@@ -63,7 +63,7 @@ namespace MusicPickerDeviceApp.App
         /// <param name="tracks">The tracks.</param>
         public void AddTracks(List<LibraryTrack> tracks)
         {
-            this.Tracks.InsertBulk(tracks);
+            Tracks.InsertBulk(tracks);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns>LibraryTrack.</returns>
         public LibraryTrack GetTrack(string id)
         {
-            return this.Tracks.FindById(new ObjectId(id));
+            return Tracks.FindById(new ObjectId(id));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool DeleteTrack(string id)
         {
-            return this.Tracks.Delete(new ObjectId(id));
+            return Tracks.Delete(new ObjectId(id));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns><c>true</c> if [is path present] [the specified path]; otherwise, <c>false</c>.</returns>
         public bool IsPathPresent(string path)
         {
-            return this.Tracks.Exists(Query.EQ("Path", path));
+            return Tracks.Exists(Query.EQ("Path", path));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool Erase()
         {
-            return this.Tracks.Drop();
+            return Tracks.Drop();
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace MusicPickerDeviceApp.App
         /// <returns>System.String.</returns>
         public string Export()
         {
-            return JsonConvert.SerializeObject(this.Tracks.FindAll());
+            return JsonConvert.SerializeObject(Tracks.FindAll());
         }
     }
 }

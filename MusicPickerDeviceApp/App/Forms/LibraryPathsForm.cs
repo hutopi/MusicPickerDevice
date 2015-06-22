@@ -75,7 +75,7 @@ namespace MusicPickerDeviceApp
         private void buttonLoad_Click_1(object sender, EventArgs e)
         {
             callback(configuration.Paths);
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -86,10 +86,10 @@ namespace MusicPickerDeviceApp
         private void LibraryPathsForm_Load(object sender, EventArgs e)
         {
             foldersLabel.Text = "";
-            this.Box.Items.Clear();
+            Box.Items.Clear();
             foreach (var path in configuration.Paths)
             {
-                this.Box.Items.Add(new TextBox()
+                Box.Items.Add(new TextBox()
                 {
                     Text = string.Format(path)
                 }.Text);
@@ -103,7 +103,7 @@ namespace MusicPickerDeviceApp
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void button1_Click(object sender, EventArgs e)
         {
-            var path = this.Box.SelectedItem;
+            var path = Box.SelectedItem;
             configuration.Paths.Remove((string)path);
 
             callback(configuration.Paths);

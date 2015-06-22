@@ -76,40 +76,40 @@
     <Compile Include="App\Api\Util\Track.cs" />
     <Compile Include="App\Configuration.cs" />
     <Compile Include="App\Api\Util\Device.cs" />
-    <Compile Include="App\DeviceState.cs" />
-    <Compile Include="App\FileWatcher.cs" />
+    <Compile Include="App\Util\DeviceState.cs" />
+    <Compile Include="App\Util\FileWatcher.cs" />
     <Compile Include="App\HubClient.cs" />
-    <Compile Include="App\JsonConverters.cs" />
+    <Compile Include="App\Util\JsonConverters.cs" />
     <Compile Include="App\Library.cs" />
-    <Compile Include="App\Player.cs" />
-    <Compile Include="App\Seeker.cs" />
-    <Compile Include="App\LibraryTrack.cs" />
-    <Compile Include="ConnectionForm.cs">
+    <Compile Include="App\Util\Player.cs" />
+    <Compile Include="App\Util\Seeker.cs" />
+    <Compile Include="App\Util\LibraryTrack.cs" />
+    <Compile Include="App\Forms\ConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectionForm.Designer.cs">
+    <Compile Include="App\Forms\ConnectionForm.Designer.cs">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContextMenus.cs" />
-    <Compile Include="LibraryPathsForm.cs">
+    <Compile Include="App\ContextMenus.cs" />
+    <Compile Include="App\Forms\LibraryPathsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LibraryPathsForm.Designer.cs">
+    <Compile Include="App\Forms\LibraryPathsForm.Designer.cs">
       <DependentUpon>LibraryPathsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MusicPickerDevice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignUpForm.cs">
+    <Compile Include="App\Forms\SignUpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignUpForm.Designer.cs">
+    <Compile Include="App\Forms\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ConnectionForm.resx">
+    <EmbeddedResource Include="App\Forms\ConnectionForm.resx">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LibraryPathsForm.resx">
+    <EmbeddedResource Include="App\Forms\LibraryPathsForm.resx">
       <DependentUpon>LibraryPathsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -122,7 +122,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SignUpForm.resx">
+    <EmbeddedResource Include="App\Forms\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

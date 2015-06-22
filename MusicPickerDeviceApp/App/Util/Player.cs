@@ -65,8 +65,8 @@ namespace MusicPickerDeviceApp.App
         /// <param name="trackId">The track identifier.</param>
         public void SetTrack(string trackId)
         {
-            this.CurrentSong = trackId;
-            LibraryTrack track = this.library.GetTrack(trackId);
+            CurrentSong = trackId;
+            LibraryTrack track = library.GetTrack(trackId);
             if (track != null)
             {
                 WaveStream stream = new AudioFileReader(track.Path);

@@ -75,7 +75,7 @@ namespace MusicPickerDeviceApp.App
             }
             else
             {
-                this.Model = new ConfigurationModel()
+                Model = new ConfigurationModel()
                 {
                     Paths = new List<string>()
                 };
@@ -88,7 +88,7 @@ namespace MusicPickerDeviceApp.App
         /// </summary>
         public void Load()
         {
-            this.Model = JsonConvert.DeserializeObject<ConfigurationModel>(File.ReadAllText("musicpicker.json"));
+            Model = JsonConvert.DeserializeObject<ConfigurationModel>(File.ReadAllText("musicpicker.json"));
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace MusicPickerDeviceApp.App
         /// </summary>
         public void Save()
         {
-            File.WriteAllText("musicpicker.json", JsonConvert.SerializeObject(this.Model));
+            File.WriteAllText("musicpicker.json", JsonConvert.SerializeObject(Model));
         }
     }
 }
