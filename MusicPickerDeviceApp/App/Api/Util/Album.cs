@@ -43,6 +43,11 @@ namespace MusicPickerDeviceApp.App
         /// <value>The MBLD.</value>
         public string Mbld { get; set; }
         /// <summary>
+        /// Gets or sets the URL of the artwork album.
+        /// </summary>
+        /// <value>The artwork URL.</value>
+        public string Artwork { get; set; }
+        /// <summary>
         /// Gets or sets the artist identifier of the album.
         /// </summary>
         /// <value>The artist identifier.</value>
