@@ -282,22 +282,22 @@ namespace MusicPickerDeviceApp
 
         /// <summary>
         /// Adds the track to the service.
+        /// Not implemented.
         /// </summary>
         /// <param name="path">The path.</param>
         public void AddTrack(string path)
         {
-            //@TODO
-            Console.WriteLine(String.Format("File added: Path:{0}", path));
+
         }
 
         /// <summary>
         /// Deletes the track of the service.
+        /// Not implemented.
         /// </summary>
         /// <param name="path">The path.</param>
         public void DeleteTrack(string path)
         {
-            //@TODO
-            Console.WriteLine(String.Format("File deleted: Path:{0}", path));
+
         }
 
         /// <summary>
