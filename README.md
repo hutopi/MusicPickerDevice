@@ -1,3 +1,10 @@
+Deprecation notice
+==================
+Updates has been made on the MusicPickerDevice source code to be compatible with 
+the [web backend rewrite](https://github.com/musicpicker/musicpicker/).
+
+This repository and the associated releases are no longer supported, please check out the fork on GitHub at [musicpicker/MusicPickerDevice](https://github.com/musicpicker/MusicPickerDevice) and the managed cloud service at [musicpicker.net](http://musicpicker.net).
+
 # MusicPickerDevice
 MusicPicker device client allows remote music playback and database collection on a computer or smart objects.
 Client scans its local music library, establishes connection with 
